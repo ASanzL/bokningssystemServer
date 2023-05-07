@@ -18,7 +18,7 @@ app.use(express.static('public'));
 
 app.route('/api/test')
 .get((req ,res) => {
-  res.send({msg: 'Secret: ' + dotenv.parsed.MYSQL_DATABASE + ' from API'});
+  res.send({msg: 'Secret: ' + process.env['MYSQL_DATABASE'] + ' from API'});
 });
 
 // catch 404 and forward to error handler
