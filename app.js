@@ -18,7 +18,23 @@ app.use(express.static('public'));
 
 app.route('/api/test')
 .get((req ,res) => {
-  res.send({msg: 'Secret: ' + process.env['MYSQL_DATABASE'] + ' from API'});
+  let x;
+  const mysql = require('mysql')
+const connection = mysql.createConnection({
+  host: process.env['MYSQL_HOST'],
+  user: process.env['MYSQL_USER'],
+  password: process.env['MYSQL_PASSWORD'],
+  database: 'db'
+});
+console.log(process.env['MYSQL_HOST'],process.env['MYSQL_USER'],process.env['MYSQL_PASSWORD'],process.env['MYSQL_DATABASE']);
+connection.connect();
+connection.query('SELECT * FROM users', (err, rows, fields) => {
+  if (err) throw err;
+
+  let = rows[0];
+});
+connection.end();
+  res.send({msg: 'Secret: ' + row + ' from API'});
 });
 
 // catch 404 and forward to error handler
