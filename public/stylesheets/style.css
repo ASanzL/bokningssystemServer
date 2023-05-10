@@ -2,6 +2,7 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   
+  
 }
 
 a {
@@ -9,9 +10,18 @@ a {
 }
 
 #pic1 {
-margin-left: 1000px
+margin-left: 1000px;
 }
 
 #pic1-1{
-  margin-left: 1000px
+  margin-left: 1000px;
+}
+
+.top-img{
+  background-image : url("https://www.rd.com/wp-content/uploads/2020/01/GettyImages-1131335393-e1650030686687.jpg");
+  background-size : cover;
+  
+}
+#welcome{
+  font-size: 100px
 }
