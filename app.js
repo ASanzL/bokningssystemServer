@@ -20,6 +20,35 @@ var connection=mysql.createConnection({
 });
 connection.connect();
 
+function isSameDay(date1, date2) {
+  date1 = new Date(date1);
+  date2 = new Date(date2);
+  return (date1.getFullYear() == date2.getFullYear()) && (date1.getMonth() == date2.getMonth()) && (date1.getDate() == date2.getDate());  
+}
+
+function getDaysInRange(startDate, endDate) {
+  dates = [];
+  date = new Date(startDate);
+  console.log(startDate, endDate);
+  while(startDate < endDate) {
+    if (isSameDay(date, endDate)) {
+      console.log('dates', dates);
+      return dates;
+    }
+    dates.push(new Date(date));
+    date.setDate(date.getDate() + 1);
+  }
+}
+
+// TODO: Only dates after today (WHERE=)
+function getBookingDaysOnAirplane(airplaneId) {
+  connection.query(`SELECT * FROM booking WHERE airplanesId=${airplaneId}`, (err, rows, fields) => {
+    if (err) throw err;
+    console.log('yo', rows[0].startTime);
+    console.log('yo', rows[0].endTime);
+    return getDaysInRange(new Date(rows[0].startTime), new Date(rows[0].endTime));
+  });
+}
 
 app.route('/api/test')
 .get((req, res) => {
@@ -40,19 +69,60 @@ app.route('/api/airplanes')
   });
 });
 
+app.route('/api/airplanes/:airplaneId')
+.get((req, res) => {
+  connection.query(`SELECT * FROM airplanes WHERE id=${req.params.airplaneId}`, (err, rows, fields) => {
+    if (err) throw err;
+    res.send(rows);
+  });
+});
+
+app.route('/api/booked/:airplaneId/:dateToCheck')
+.get((req, res) => {
+  connection.query(`SELECT * FROM booking WHERE airplanesId=${req.params.airplaneId}`, (err, rows, fields) => {
+    if (err) throw err;
+    for (r of rows) {
+      date = new Date(r.startTime);
+      date.setHours(date.getHours()+2);
+      endDate = new Date(r.endTime);
+      endDate.setHours(endDate.getHours()+2);
+      dateToCheck = new Date(req.params.dateToCheck);
+      while(date < endDate) {
+        if (isSameDay(date, dateToCheck)) {
+          res.send(true);
+          return;
+        }
+        date.setDate(date.getDate() + 1);
+      }
+    }
+    res.send(false);
+  });
+});
+
+
+
+app.route('/api/booked/')
+.get((req, res) => {
+  connection.query(`SELECT * FROM booking`, (err, rows, fields) => {
+    if (err) throw err;
+    res.send(rows);
+  });
+});
+
 app.route('/api/book')
 .post((req, res) => {
   console.log(req.body);
   let startTime = new Date(req.body.startTime);
   startTime = startTime.toISOString().slice(0, 19).replace('T', ' ');
   let endTime = new Date(req.body.endTime);
+  // Make it end of the day
+  endTime.setDate(endTime.getDate()+1);
+  endTime.setSeconds(endTime.getSeconds()-1);
   endTime = endTime.toISOString().slice(0, 19).replace('T', ' ');
-  // startTime = `${startTime.getFullYear()}${startTime.getUTCMonth()}${startTime.getDate()}${startTime.getHours()}${startTime.getMinutes()}${startTime.getSeconds()}`;
-  console.log(startTime);
-  // insert into booking (personnummer, airplanesId, startTime, endTime) values (12341122-1234, 1, NOW(), NOW());
+  // console.log(getDaysInRange(startTime, endTime));
+  console.log('days', getBookingDaysOnAirplane(1));
   connection.query(
-    `insert into booking (personnummer, airplanesId, startTime, endTime) values (${req.body.personnummer}, ${req.body.airplanesId}, '${(startTime)}', '${(endTime)}')`,
-    // `INSERT INTO booking (personnummer, airplanesId, startTime, endTime) VALUES ("${req.body.personnummer}" "${req.body.airplanesId}" "${req.body.startTime}" "${req.body.endTime}" )`,
+    `insert into booking (personnummer, airplanesId, startTime, endTime) values ("${req.body.personnummer}", ${req.body.airplanesId}, '${(startTime)}', '${(endTime)}')`,
     (err, rows, fields) => {
       if (err) throw err;
       res.send(200);
