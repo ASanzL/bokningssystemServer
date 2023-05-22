@@ -8,44 +8,43 @@
     <title>Flygbokningssystem</title>
 </head>
 <div class="routes">
-    <marquee behavior="alternate" scrollamount="200"><a href="booked.html" class="bokningar">BOKNINGAR</a></marquee>
+    <a href="booked.html" class="bokningar">BOKNINGAR</a>
 </div>
 <div class="top-img">
-    <marquee scrollamount="40" ><p id="welcome"> is hotdawg truly a sandwich???!!! <input placeholder="yes/no"></p></marquee>
 </div>
 <body>
-    <div id ="div1"></div>
-    <br>
-    <label for="namn">age is just a number</label>
-    <br>
-    <input id = "uname"></input>
-    <br>
-    <br>
-    <label for="personnummer">gimme ur social security number!:</label>
-    <br>
-    <input id = "uid"></input>
-    <br>
-    <br>
-    <label for="planes">jail is just a room</label>
-    <br>
-    <select name="planes" id ="planes">   
-    </select> 
-    <br>
-    <br>
-    <label for="Time">start date:</label>
-    <br>
-    <input type="date" id="starttime"></input>
-    <br>
-    <br>
-    <label for="Time">pick a deadline:</label>
-    
-    <br>
-    <input type="date" id="endtime"></input>
-    <br>
-    <br>
-    <br>
-    <button id ="knapp">book plane</button>
-    <span id="test">Hejjj</span>
+    <div class="book-form">
+        <br>
+        <label for="namn">Name</label>
+        <br>
+        <input id = "uname"></input>
+        <br>
+        <br>
+        <label for="personnummer">Personnummer</label>
+        <br>
+        <input id = "uid"></input>
+        <br>
+        <br>
+        <label for="planes">Airplane</label>
+        <br>
+        <select name="planes" id ="planes">   
+        </select> 
+        <br>
+        <br>
+        <label for="Time">Start date:</label>
+        <br>
+        <input type="date" id="starttime"></input>
+        <br>
+        <br>
+        <label for="Time">Pick a deadline:</label>
+        
+        <br>
+        <input type="date" id="endtime"></input>
+        <br>
+        <br>
+        <br>
+        <button id="knapp" class="book-button">Book plane</button>
+    </div>
     
     <script src="javascripts/test.js">
 

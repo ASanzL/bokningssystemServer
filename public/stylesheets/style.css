@@ -1,6 +1,6 @@
 body {
   margin: 0px;
-  padding: 50px;
+  padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -8,27 +8,26 @@ a {
   color: #00B7FF;
 }
 
-#pic1 {
+/* #pic1 {
 margin-left: 1000px;
 }
 
 #pic1-1{
   margin-left: 1000px;
   
-}
+} */
 
 .top-img{
+  display:block;
+  height: 200px;
   opacity: 0.8;
   background-image : url("https://www.rd.com/wp-content/uploads/2020/01/GettyImages-1131335393-e1650030686687.jpg");
   background-size : cover;
-  margin: -50px;
+  background-position: center;
+  margin: 0px;
   padding: 0px;
-  margin-bottom: 10px;
-  margin-top: 50px;
-  /* margin-left: -50px;
-  margin-right: -50px;
-  margin-top: -50px */
-  
+  /* margin-bottom: 10px;
+  margin-top: 50px; */
   
 }
 #welcome{
@@ -43,22 +42,47 @@ input {
   font: 24px Arial;
 } 
 .routes{
+  display: block;
   background-color: #4B4341;
   padding: 0px;
-  margin: -50px;
-  height: 60px;
+  /* margin: -50px; */
+  /* height: 60px; */
   
   
 }
+.book-form {
+  margin: 10px auto;
+  width: 500px;
+  padding: 20px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}
+.book-button {
+  font-size: 20pt;
+  background-color: #00B7FF;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 8px;
+  transition: background-color 0.2s;
+}
+.book-button:hover {
+  background-color: #3896bb;
+  transition: background-color 0.8s;
+}
+.book-button:active {
+  transition: background-color 0.05s;
+  background-color: rgb(129, 129, 89);
+}
 .bokningar{
+  display: block;
   color: #FFFFFF;
-  font-size: 350%;
+  font-size: 24pt;
   text-decoration: none;
-  padding: 5px;
+  /* margin: 25px; */
+  padding: 10px;
   transition: color 0.8s;
 }
 .bokningar:hover {
-  transition: color 3s;
   color: yellow;
 }
 

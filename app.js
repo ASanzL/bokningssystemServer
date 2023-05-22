@@ -18,7 +18,7 @@ var connection=mysql.createConnection({
   database: process.env['MYSQL_DATABASE'],
   port: process.env['MYSQL_PORT'],
 });
-connection.connect();
+// connection.connect();
 
 function isSameDay(date1, date2) {
   date1 = new Date(date1);
@@ -61,6 +61,7 @@ app.route('/api/test')
   });
 });
 
+// Returns a list of all airplanes
 app.route('/api/airplanes')
 .get((req, res) => {
   connection.query('SELECT * FROM airplanes', (err, rows, fields) => {
@@ -69,6 +70,7 @@ app.route('/api/airplanes')
   });
 });
 
+// Returns a list of the airlane with id = airplaneId
 app.route('/api/airplanes/:airplaneId')
 .get((req, res) => {
   connection.query(`SELECT * FROM airplanes WHERE id=${req.params.airplaneId}`, (err, rows, fields) => {
@@ -111,7 +113,6 @@ app.route('/api/booked/')
 
 app.route('/api/book')
 .post((req, res) => {
-  console.log(req.body);
   let startTime = new Date(req.body.startTime);
   startTime = startTime.toISOString().slice(0, 19).replace('T', ' ');
   let endTime = new Date(req.body.endTime);
@@ -119,7 +120,6 @@ app.route('/api/book')
   endTime.setDate(endTime.getDate()+1);
   endTime.setSeconds(endTime.getSeconds()-1);
   endTime = endTime.toISOString().slice(0, 19).replace('T', ' ');
-  // console.log(getDaysInRange(startTime, endTime));
   console.log('days', getBookingDaysOnAirplane(1));
   connection.query(
     `insert into booking (personnummer, airplanesId, startTime, endTime) values ("${req.body.personnummer}", ${req.body.airplanesId}, '${(startTime)}', '${(endTime)}')`,

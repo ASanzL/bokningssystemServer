@@ -1,15 +1,11 @@
-async function handleresponse2(){
-    var xhr = new XMLHttpRequest();
+async function updateTable(){
     var url = "/api/booked";
     const response = await fetch(url);
     const jsonData = await response.json();
-    console.log(jsonData);
     booked = document.getElementById("bookedtable")
     x = await getplanename(1);
-    console.log('hej', x);
     jsonData.forEach(async e => {
         const airplaneName = await getplanename(1);
-        console.log(airplaneName);
         tr = document.createElement('tr');
         td = document.createElement('td');
         td.appendChild(document.createTextNode(e.bookingId));
@@ -32,7 +28,6 @@ async function handleresponse2(){
 }
 
 async function getplanename(id){
-    var xhr = new XMLHttpRequest();
     var url = `/api/airplanes/${id}`;
     const response = await fetch(url);
     const jsonData = await response.json();
@@ -42,4 +37,4 @@ async function getplanename(id){
     }
 }
 
-handleresponse2();
+updateTable();
