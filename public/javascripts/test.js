@@ -19,6 +19,21 @@ document.getElementById("knapp").addEventListener('click', () => {
     "startTime": document.getElementById("starttime").value,
     "endTime": document.getElementById("endtime").value });
     xhr.send(data);
+    
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.UNSENT) {
+            alert(xhr.responseText);
+            console.log('it dont work buddy');
+        }
+        else if (xhr.readyState == XMLHttpRequest.DONE){
+            boi = document.getElementById('anounce')
+            p = document.createElement('p');
+            p.appendChild(document.createTextNode('yes i think it woekd'))
+            boi.appendChild(p);
+
+        }
+    }
+    
 });
 
 async function updateSelect(){
@@ -34,4 +49,4 @@ async function updateSelect(){
     }
 }
 
-// updateSelect();
+updateSelect();
