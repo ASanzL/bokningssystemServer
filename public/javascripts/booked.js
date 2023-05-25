@@ -5,7 +5,7 @@ async function updateTable(){
     booked = document.getElementById("bookedtable")
     x = await getplanename(1);
     jsonData.forEach(async e => {
-        const airplaneName = await getplanename(1);
+        const airplaneName = await getplanename(e.airplanesId);
         tr = document.createElement('tr');
         td = document.createElement('td');
         td.appendChild(document.createTextNode(e.bookingId));
@@ -18,11 +18,8 @@ async function updateTable(){
         td3.appendChild(document.createTextNode(airplaneName));
         tr.appendChild(td3);
         td4 = document.createElement('td');
-        td4.appendChild(document.createTextNode(new Date(e.startTime).toDateString()));
+        td4.appendChild(document.createTextNode(new Date(e.day).toDateString()));
         tr.appendChild(td4);
-        td5 = document.createElement('td');
-        td5.appendChild(document.createTextNode(new Date(e.endTime).toDateString()));
-        tr.appendChild(td5);
         booked.appendChild(tr);
     });
 }

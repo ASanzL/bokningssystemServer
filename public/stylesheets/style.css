@@ -111,3 +111,19 @@ table, td, tr{
   margin-left: 800px;
   margin-bottom: -150px;
 } */
+
+#nothotdog{
+  font-size: 500%;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  margin-left: 500px;
+  text-shadow: 2px 2px 5px rgb(9, 31, 3);
+  color: rgb(72, 212, 29);
+}
+#nothotdog2{
+  font-size: 300%;
+  font-family: cursive;
+  margin-left: 550px;
+  margin-top: -70px;
+  text-shadow: 2px 2px 5px rgb(53, 8, 8);
+  color: rgb(72, 212, 29);
+}
