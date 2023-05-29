@@ -110,7 +110,7 @@ app.route('/api/airplanes/:airplaneId')
 
 app.route('/api/booked/')
 .get((req, res) => {
-  connection.query(`SELECT * FROM booking`, (err, rows, fields) => {
+  connection.query(`SELECT * FROM booking ORDER BY day DESC`, (err, rows, fields) => {
     if (err) {
       res.send(400);
     } else {
